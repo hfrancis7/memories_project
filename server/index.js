@@ -10,7 +10,7 @@ app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
 
-const CONNECTION_URL = process.env.CONNECTION_URL || "mongodb://localhost:27017";
+const CONNECTION_URL = process.env.CONNECTION_URL || "mongodb://127.0.0.1:27017/memories";
 const PORT = process.env.PORT || 5000;
 
 //not required, but will get warnings in console if you don't use useNewUrlParser and useUnifiedTopology
