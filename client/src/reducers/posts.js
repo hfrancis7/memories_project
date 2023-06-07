@@ -3,13 +3,13 @@
 //a reducer is a function -- has a state and an action
 //state has been renamed to post
 
-const reducer = (posts = [], action) => {
+export default (posts = [], action) => {
     switch(action.type){
         case 'FETCH_ALL':
-            return posts;
+            return action.payload;
         case 'CREATE': 
             return posts;
         default: 
-            break;
+            return posts;
     }
 }
