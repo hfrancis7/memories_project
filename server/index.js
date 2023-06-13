@@ -7,14 +7,15 @@ import postRoutes from './routes/posts.js'
 
 const app = express(); //initialize app with express
 
-//set posts routes
-// localhost:3000/posts/
-app.use('/posts', postRoutes);
-
 //set up things on app like bodyparser and cors
 app.use(bodyParser.json({limit: "30mb", extended: true}));
 app.use(bodyParser.urlencoded({limit: "30mb", extended: true}));
 app.use(cors());
+
+//set posts routes
+// localhost:3000/posts/
+//this needs to be below the "cors" part to not get cors errors
+app.use('/posts', postRoutes);
 
 const CONNECTION_URL = process.env.CONNECTION_URL || "mongodb://127.0.0.1:27017/memories";
 const PORT = process.env.PORT || 3001;
