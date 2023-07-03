@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
 import {TextField, Button, Typography, Paper} from '@material-ui/core'
 import FileBase from 'react-file-base64';
+import {useDispatch} from 'react-redux';
+import {createPost} from '../../actions/posts';
 
 import useStyles from './styles'
 
 function Form() {
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [postData, setPostData] = useState({
     creator: '',
     title: '',
@@ -18,15 +21,15 @@ function Form() {
 
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    dispatch(createPost(postData));
   }
-
-  
 
   return (
     <Paper className={classes.paper}>
-      <form autoComplete='off' novalidate className={classes.form} onSubmit={handleSubmit}>
+      <form autoComplete='off' novalidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
         <Typography variant='h6'>Creating A Memory</Typography>
         <TextField name="creator" variant="outlined" label="Creator" fullWidth value={postData.creator} onChange={(e) => setPostData({...postData, creator: e.target.value})}/>
         <TextField name="title" variant="outlined" label="Title" fullWidth value={postData.title} onChange={(e) => setPostData({...postData, title: e.target.value})}/>
